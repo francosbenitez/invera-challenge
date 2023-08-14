@@ -6,8 +6,10 @@ distlib==0.3.7
 dj-rest-auth==2.1.5
 Django==4.2.4
 djangorestframework==3.14.0
+drf-yasg==1.21.7
 filelock==3.12.2
 identify==2.5.26
+inflection==0.5.1
 isort==5.12.0
 mypy-extensions==1.0.0
 nodeenv==1.8.0
@@ -21,4 +23,5 @@ PyYAML==6.0.1
 sqlparse==0.4.4
 tomli==2.0.1
 typing_extensions==4.7.1
+uritemplate==4.1.1
 virtualenv==20.24.3
