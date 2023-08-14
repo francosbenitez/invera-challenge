@@ -3,30 +3,32 @@ on:
   workflow_dispatch
   # push:
   #   branches: [main]
+
 jobs:
   tests:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup
+      - name: Set Up Python
         uses: actions/setup-python@v2
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Create env file
+      - name: Create .env File
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
 
-      - name: Lint
+      - name: Lint Code
         run: |
           black --check .
           isort --check .
 
-      - name: Check migrations
+      - name: Check Migrations
         run: python manage.py makemigrations --check
 
-      - name: Run tests
+      - name: Run Tests
         run: pytest .
