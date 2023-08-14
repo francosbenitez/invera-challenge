@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third-party apps
     "rest_framework",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
     # Local apps
     "apps.accounts",
     "apps.tasks",
