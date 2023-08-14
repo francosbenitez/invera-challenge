@@ -6,6 +6,11 @@ from .managers import UserManager
 
 
 class User(AbstractBaseUser):
+    """
+    Custom User model representing a user of the application.
+    """
+
+    # User fields
     email = models.EmailField(
         unique=True, error_messages={"unique": "Este email ya está registrado."}
     )
@@ -17,10 +22,16 @@ class User(AbstractBaseUser):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    # Configuration
+    USERNAME_FIELD = "email"  # Field used for authentication
+    REQUIRED_FIELDS = []  # Other required fields for user creation
 
-    objects = UserManager()
+    objects = UserManager()  # Custom manager for user operations
 
+    # Methods
     def get_full_name(self):
+        """
+        Returns the full name of the user.
+        """
+
         return self.first_name + " " + self.last_name
