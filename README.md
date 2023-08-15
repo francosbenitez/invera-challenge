@@ -4,6 +4,10 @@ Django application for the Invera's challenge.
 
 [![Built with Django](https://img.shields.io/badge/built%20with%20Django-ff69b4.svg?logo=django&color=black)](/)
 
+# Postman Documentation
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/[POSTMANID]?action=collection%2Fimport)
+
 ## Getting Up and Running Locally with Docker
 
 The steps below will get you up and running with a local development environment. All of these commands assume you are in the root of your generated project.
