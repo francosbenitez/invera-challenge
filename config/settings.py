@@ -52,6 +52,13 @@ INSTALLED_APPS = [
     "apps.tasks",
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ),
+    "DEFAULT_PAGINATION_CLASS": "config.pagination.StandardResultsSetPagination",
+}
+
 REST_USE_JWT = True
 REST_SESSION_LOGIN = False
 
@@ -159,3 +166,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "accounts.User"

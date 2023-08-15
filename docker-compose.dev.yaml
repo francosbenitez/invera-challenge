@@ -2,6 +2,8 @@ version: "3"
 services:
   db:
     image: postgres:13
+    ports:
+      - "54320:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:

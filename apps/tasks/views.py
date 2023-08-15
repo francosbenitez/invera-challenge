@@ -11,22 +11,21 @@ from .models import Task
 from .serializers import TaskSerializer
 
 
-class TaskCreateAPIView(CreateAPIView):
+class TaskMixin:
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class TaskCreateAPIView(TaskMixin, CreateAPIView):
     """
     Creates a new task.
     """
 
-    serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
 
-
-class TaskListAPIView(ListAPIView):
+class TaskListAPIView(TaskMixin, ListAPIView):
     """
     Lists all tasks.
     """
-
-    serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = Task.objects.all()
@@ -46,21 +45,17 @@ class TaskListAPIView(ListAPIView):
         return sorted_queryset
 
 
-class TaskDestroyAPIView(DestroyAPIView):
+class TaskDestroyAPIView(TaskMixin, DestroyAPIView):
     """
     Deletes a task.
     """
 
-    serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
     queryset = Task.objects.all()
 
 
-class TaskUpdateAPIView(UpdateAPIView):
+class TaskUpdateAPIView(TaskMixin, UpdateAPIView):
     """
     Updates a task.
     """
 
-    serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
     queryset = Task.objects.all()
