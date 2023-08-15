@@ -34,9 +34,26 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/tasks/", include("apps.tasks.urls")),
-    path("api/accounts/", include("dj_rest_auth.urls")),
-    path("api/accounts/registration/", include("dj_rest_auth.registration.urls")),
+    path(
+        "api/",
+        include(
+            [
+                path("tasks/", include("apps.tasks.urls")),
+                path(
+                    "accounts/",
+                    include(
+                        [
+                            path("", include("dj_rest_auth.urls")),
+                            path(
+                                "registration/",
+                                include("dj_rest_auth.registration.urls"),
+                            ),
+                        ]
+                    ),
+                ),
+            ]
+        ),
+    ),
 ]
 
 if settings.DEBUG:
