@@ -1,37 +1,29 @@
-# Invera ToDo-List Challenge (Python/Django Jr-SSr)
+# Challenge @ Invera
 
-El propósito de esta prueba es conocer tu capacidad para crear una pequeña aplicación funcional en un límite de tiempo. A continuación, encontrarás las funciones, los requisitos y los puntos clave que debés tener en cuenta durante el desarrollo.
+Django application for the Invera's challenge.
 
-## Qué queremos que hagas:
+[![Built with Django](https://img.shields.io/badge/built%20with%20Django-ff69b4.svg?logo=django&color=black)](/)
 
-- El Challenge consiste en crear una aplicación web sencilla que permita a los usuarios crear y mantener una lista de tareas.
-- La entrega del resultado será en un nuevo fork de este repo y deberás hacer una pequeña demo del funcionamiento y desarrollo del proyecto ante un super comité de las más grandes mentes maestras de Invera, o a un par de devs, lo que sea más fácil de conseguir.
-- Podes contactarnos en caso que tengas alguna consulta.
+## Getting Up and Running Locally with Docker
 
-## Objetivos:
+The steps below will get you up and running with a local development environment. All of these commands assume you are in the root of your generated project.
 
-El usuario de la aplicación tiene que ser capaz de:
+### Prerequisites
 
-- Autenticarse
-- Crear una tarea
-- Eliminar una tarea
-- Marcar tareas como completadas
-- Poder ver una lista de todas las tareas existentes
-- Filtrar/buscar tareas por fecha de creación y/o por el contenido de la misma
+- Docker
+- Docker-Compose
 
-## Qué evaluamos:
+### Steps
 
-- Desarrollo utilizando Python, Django. No es necesario crear un Front-End, pero sí es necesario tener una API que permita cumplir con los objetivos de arriba.
-- Uso de librerías y paquetes estandares que reduzcan la cantidad de código propio añadido.
-- Calidad y arquitectura de código. Facilidad de lectura y mantenimiento del código. Estándares seguidos.
-- [Bonus] Manejo de logs.
-- [Bonus] Creación de tests (unitarias y de integración)
-- [Bonus] Unificar la solución propuesta en una imagen de Docker por repositorio para poder ser ejecutada en cualquier ambiente (si aplica para full stack).
+#### Local
 
-## Requerimientos de entrega:
+- Clone the repo `git clone https://github.com/francosbenitez/invera-challenge`.
+- Navigate to repo directory `cd invera-challenge`.
+- Build and run the docker-compose file `docker-compose -f docker-compose.dev.yaml up --build`.
+- Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
+- Enjoy!
 
-- Hacer un fork del proyecto y pushearlo en github. Puede ser privado.
-- La solución debe correr correctamente.
-- El Readme debe contener todas las instrucciones para poder levantar la aplicación, en caso de ser necesario, y explicar cómo se usa.
-- Disponibilidad para realizar una pequeña demo del proyecto al finalizar el challenge.
-- Tiempo para la entrega: Aproximadamente 7 días.
+#### Preview
+
+- Go to [https://invera-challenge.up.railway.app/](https://invera-challenge.up.railway.app/)
+- Enjoy!
