@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Local apps
     "apps.accounts",
     "apps.tasks",
+    "apps.core",
 ]
 
 REST_FRAMEWORK = {
