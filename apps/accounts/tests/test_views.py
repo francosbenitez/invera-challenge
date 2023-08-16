@@ -6,60 +6,52 @@ logger = logging.getLogger(__name__)
 
 
 @pytest.mark.django_db
-def test_register(client):
-    """
-    Tests that a user can register.
-    """
+class TestUserAuthentication:
 
-    payload = dict(
-        first_name="Franco",
-        last_name="Benitez",
-        email="francosbenitez_2@gmail.com",
-        password1="holaquetal",
-        password2="holaquetal",
-    )
+    registration_url = "/api/accounts/registration/"
+    login_url = "/api/accounts/login/"
 
-    response = client.post("/api/accounts/registration/", payload)
+    def test_successful_user_registration(self, client):
+        """
+        Test successful user registration.
+        """
+        payload = {
+            "first_name": "Franco",
+            "last_name": "Benitez",
+            "email": "francosbenitez_2@gmail.com",
+            "password1": "holaquetal",
+            "password2": "holaquetal",
+        }
 
-    logger.info(f"Response: {response.data}")
+        response = client.post(self.registration_url, payload)
+        logger.info(f"Registration Response: {response.data}")
 
-    assert response.status_code == 201
+        assert response.status_code == 201
 
+    def test_successful_user_login(self, client, user):
+        """
+        Test successful user login.
+        """
+        response = client.post(
+            self.login_url, {"email": user.email, "password": "holaquetal"}
+        )
+        logger.info(f"Login Response: {response.data}")
 
-@pytest.mark.django_db
-def test_login(client, user):
-    """
-    Tests that a user can login.
-    """
+        assert response.status_code == 200
 
-    assert user is not None
-    assert user.email == "francosbenitez@gmail.com"
+    def test_failed_login_invalid_credentials(self, client):
+        """
+        Test failed user login due to invalid credentials.
+        """
+        payload = {
+            "email": "nonexistentuser@email.com",
+            "password": "nonexistentuser",
+        }
 
-    payload = dict(
-        email="francosbenitez_2@gmail.com",
-        password="holaquetal",
-    )
+        response = client.post(self.login_url, payload)
+        logger.info(f"Failed Login Response: {response.data}")
 
-    response = client.post("/api/accounts/login/", payload)
-
-    logger.info(f"Response: {response.data}")
-
-    assert response.status_code == 200
-
-
-@pytest.mark.django_db
-def test_login_fail(client):
-    """
-    This test should fail because the user does not exist.
-    """
-
-    payload = dict(email="nonexistentuser@email.com", password="nonexistentuser")
-
-    response = client.post(
-        "/api/accounts/login/",
-        payload,
-    )
-
-    logger.info(f"Response: {response.data}")
-
-    assert response.status_code == 401
+        assert response.status_code == 400
+        assert response.json() == {
+            "non_field_errors": ["Unable to log in with provided credentials."]
+        }

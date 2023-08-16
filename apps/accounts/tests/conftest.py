@@ -1,20 +1,20 @@
 import pytest
 from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
+from django.test import Client
 from django.utils import timezone
-from rest_framework.test import APIClient
 
-User = get_user_model
+User = get_user_model()
 
 
 @pytest.fixture
 def client():
-    return APIClient()
+    return Client()
 
 
 @pytest.fixture
-def user():
-    user = User.objects.create_user(
+def user(db):
+    return User.objects.create_user(
         password="holaquetal",
         last_login=timezone.now(),
         is_admin=False,
@@ -23,14 +23,16 @@ def user():
         is_active=True,
         is_staff=False,
         last_name="Benitez",
-        is_email_verified=False,
     )
 
-    EmailAddress.objects.create(
+
+@pytest.fixture
+def verified_email(user):
+    email = EmailAddress.objects.create(
         user=user,
         email=user.email,
         primary=True,
         verified=True,
     )
 
-    return user
+    return email
