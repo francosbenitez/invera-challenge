@@ -23,7 +23,7 @@ The steps below will get you up and running with a local development environment
 
 - Clone the repo `git clone https://github.com/francosbenitez/invera-challenge`.
 - Navigate to repo directory `cd invera-challenge`.
-- Build and run the docker-compose file `docker-compose -f docker-compose.dev.yaml up --build`.
+- Build and run the docker-compose file `docker-compose -f docker-compose.yaml up --build`.
 - Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
 - Enjoy!
 
