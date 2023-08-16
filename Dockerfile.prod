@@ -15,5 +15,5 @@ COPY . /app
 WORKDIR /app
 
 # Copy the entrypoint script to the container and set it as the entrypoint
-COPY ./entrypoint.sh .
-ENTRYPOINT ["sh", "/app/entrypoint.sh"]
+COPY ./entrypoint.prod.sh .
+ENTRYPOINT ["sh", "/app/entrypoint.prod.sh"]

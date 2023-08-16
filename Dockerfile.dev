@@ -22,5 +22,4 @@ COPY . /code/
 # Add executable permissions to wait-for-it and entrypoint
 RUN chmod +x /code/wait-for-postgres.sh
 RUN chmod +x /code/entrypoint.dev.sh
-
 ENTRYPOINT ["sh", "/code/entrypoint.dev.sh"]
