@@ -2,8 +2,7 @@ import logging
 
 import pytest
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("my_logger")
+logger = logging.getLogger(__name__)
 
 
 @pytest.mark.django_db
