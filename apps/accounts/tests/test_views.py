@@ -7,7 +7,6 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.django_db
 class TestUserAuthentication:
-
     registration_url = "/api/accounts/registration/"
     login_url = "/api/accounts/login/"
 
