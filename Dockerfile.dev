@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9
+FROM python:3.9-slim-buster
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -12,5 +12,15 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Install netcat
+RUN apt-get update \
+    && apt-get -y install netcat
+
 # Copy the entire project
 COPY . /code/
+
+# Add executable permissions to wait-for-it and entrypoint
+RUN chmod +x /code/wait-for-postgres.sh
+RUN chmod +x /code/entrypoint.dev.sh
+
+ENTRYPOINT ["sh", "/code/entrypoint.dev.sh"]
