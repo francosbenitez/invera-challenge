@@ -1,5 +1,22 @@
-from django.urls import path
+from django.urls import include, path
 
-from . import views
+from .views import (
+    UserTaskAssignmentAPIView,
+    UserTaskListAPIView,
+    UserTaskRemovalAPIView,
+)
 
-urlpatterns = []
+urlpatterns = [
+    path("", include("dj_rest_auth.urls")),
+    path(
+        "registration/",
+        include("dj_rest_auth.registration.urls"),
+    ),
+    path("tasks/", UserTaskListAPIView.as_view(), name="user-task-list"),
+    path(
+        "tasks/assignment/",
+        UserTaskAssignmentAPIView.as_view(),
+        name="user-task-assignment",
+    ),
+    path("tasks/removal/", UserTaskRemovalAPIView.as_view(), name="user-task-removal"),
+]

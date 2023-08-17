@@ -41,15 +41,7 @@ urlpatterns = [
                 path("tasks/", include("apps.tasks.urls")),
                 path(
                     "accounts/",
-                    include(
-                        [
-                            path("", include("dj_rest_auth.urls")),
-                            path(
-                                "registration/",
-                                include("dj_rest_auth.registration.urls"),
-                            ),
-                        ]
-                    ),
+                    include("apps.accounts.urls"),
                 ),
             ]
         ),

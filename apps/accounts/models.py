@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from django.utils import timezone
 
+from apps.tasks.models import Task
+
 from .managers import UserManager
 
 
@@ -20,6 +22,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=20)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
+    tasks = models.ManyToManyField(Task)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

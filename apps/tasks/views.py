@@ -34,7 +34,9 @@ class TaskListAPIView(TaskMixin, ListAPIView):
 
         if keyword:
             queryset = queryset.filter(
-                Q(title__icontains=keyword) | Q(description__icontains=keyword)
+                Q(title__icontains=keyword)
+                | Q(description__icontains=keyword)
+                | Q(created_at__icontains=keyword)
             )
 
         if completed in ("true", "false"):
