@@ -27,11 +27,11 @@ The steps below will get you up and running with a local development environment
 - Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
 - Enjoy!
 
+##### Tests
+
+- Run `docker-compose run --rm web pytest`.
+
 #### Preview
 
 - Go to [https://invera-challenge.up.railway.app/](https://invera-challenge.up.railway.app/)
 - Enjoy!
-
-#### Tests
-
-- In the command line, run `docker-compose run --rm web pytest`.
