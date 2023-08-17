@@ -17,7 +17,9 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": os.path.join("logs", "debug.log"),
+            "filename": os.path.join("logs", "debug.log")
+            if os.path.exists("logs")
+            else "debug.log",
             "formatter": "verbose",
         },
         "console": {
