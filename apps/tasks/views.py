@@ -29,18 +29,16 @@ class TaskListAPIView(TaskMixin, ListAPIView):
 
     def get_queryset(self):
         queryset = Task.objects.all()
-        completed = self.request.query_params.get("completed")
-        keyword = self.request.query_params.get("keyword")
+        content = self.request.query_params.get("content")
+        created_at = self.request.query_params.get("created_at")
 
-        if keyword:
+        if created_at:
+            queryset = queryset.filter(created_at__icontains=created_at)
+
+        if content:
             queryset = queryset.filter(
-                Q(title__icontains=keyword)
-                | Q(description__icontains=keyword)
-                | Q(created_at__icontains=keyword)
+                Q(title__icontains=content) | Q(description__icontains=content)
             )
-
-        if completed in ("true", "false"):
-            queryset = queryset.filter(completed=(completed == "true"))
 
         sorted_queryset = queryset.order_by("-created_at")
 
