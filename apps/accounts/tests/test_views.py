@@ -1,56 +1,43 @@
-import logging
+from logging import getLogger
 
 import pytest
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 @pytest.mark.django_db
-class TestUserAuthentication:
-    registration_url = "/api/accounts/registration/"
-    login_url = "/api/accounts/login/"
+def test_successful_user_registration(api_client, registration_url, user_data):
+    """
+    Test successful user registration.
+    """
 
-    def test_successful_user_registration(self, client):
-        """
-        Test successful user registration.
-        """
-        payload = {
-            "first_name": "Franco",
-            "last_name": "Benitez",
-            "email": "francosbenitez_2@gmail.com",
-            "password1": "holaquetal",
-            "password2": "holaquetal",
-        }
+    response = api_client.post(registration_url, user_data)
+    assert response.status_code == 201
 
-        response = client.post(self.registration_url, payload)
-        logger.info(f"Registration Response: {response.data}")
 
-        assert response.status_code == 201
+@pytest.mark.django_db
+def test_successful_user_login(api_client, login_url, valid_user):
+    """
+    Test successful user login.
+    """
 
-    def test_successful_user_login(self, client, user):
-        """
-        Test successful user login.
-        """
-        response = client.post(
-            self.login_url, {"email": user.email, "password": "holaquetal"}
-        )
-        logger.info(f"Login Response: {response.data}")
+    response = api_client.post(
+        login_url, {"email": valid_user.email, "password": "holaquetal"}
+    )
 
-        assert response.status_code == 200
+    logger.info(response.json())
 
-    def test_failed_login_invalid_credentials(self, client):
-        """
-        Test failed user login due to invalid credentials.
-        """
-        payload = {
-            "email": "nonexistentuser@email.com",
-            "password": "nonexistentuser",
-        }
+    assert response.status_code == 200
 
-        response = client.post(self.login_url, payload)
-        logger.info(f"Failed Login Response: {response.data}")
 
-        assert response.status_code == 400
-        assert response.json() == {
-            "non_field_errors": ["Unable to log in with provided credentials."]
-        }
+@pytest.mark.django_db
+def test_failed_login_invalid_credentials(api_client, login_url, invalid_user):
+    """
+    Test failed user login due to invalid credentials.
+    """
+
+    response = api_client.post(login_url, invalid_user)
+    assert response.status_code == 400
+    assert response.json() == {
+        "non_field_errors": ["Unable to log in with provided credentials."]
+    }

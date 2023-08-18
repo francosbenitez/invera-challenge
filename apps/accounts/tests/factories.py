@@ -3,12 +3,14 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from factory.django import DjangoModelFactory
 
-from apps.tasks.models import Task
-
 User = get_user_model()
 
 
 class UserFactory(DjangoModelFactory):
+    """
+    Factory for creating sample users.
+    """
+
     class Meta:
         model = User
 
