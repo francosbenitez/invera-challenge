@@ -1,3 +1,4 @@
+from datetime import datetime
 from logging import getLogger
 
 import pytest
@@ -10,6 +11,31 @@ logger = getLogger(__name__)
 
 
 @pytest.mark.django_db
+def test_list_tasks(authenticated_api_client):
+    url = reverse("task-list")
+    response = authenticated_api_client.get(url)
+    assert response.status_code == status.HTTP_200_OK
+
+
+@pytest.mark.django_db
+def test_list_tasks_by_content(authenticated_api_client, task):
+    url = reverse("task-list")
+    response = authenticated_api_client.get(url, query_params={"content": "Task"})
+    assert response.status_code == status.HTTP_200_OK
+    assert response.data["results"][0]["title"] == task.title
+
+
+@pytest.mark.django_db
+def test_list_tasks_by_date(authenticated_api_client, task):
+    url = reverse("task-list")
+    response = authenticated_api_client.get(
+        url, query_params={"date": datetime.now().strftime("%Y-%m-%d")}
+    )
+    assert response.status_code == status.HTTP_200_OK
+    assert response.data["results"][0]["title"] == task.title
+
+
+@pytest.mark.django_db
 def test_create_task(authenticated_api_client, task_data):
     url = reverse("task-create")
     response = authenticated_api_client.post(url, data=task_data)
@@ -18,20 +44,13 @@ def test_create_task(authenticated_api_client, task_data):
 
 
 @pytest.mark.django_db
-def test_list_tasks(authenticated_api_client):
-    url = reverse("task-list")
-    response = authenticated_api_client.get(url)
-    assert response.status_code == status.HTTP_200_OK
-
-
-@pytest.mark.django_db
 def test_update_task(authenticated_api_client, task, task_update_data):
     url = reverse("task-update", kwargs={"pk": task.id})
     response = authenticated_api_client.patch(url, data=task_update_data)
     assert response.status_code == status.HTTP_200_OK
     task.refresh_from_db()
-    assert task.title == "Updated Task"
-    assert task.completed
+    assert task.title == task_update_data["title"]
+    assert task.completed == task_update_data["completed"]
 
 
 @pytest.mark.django_db
