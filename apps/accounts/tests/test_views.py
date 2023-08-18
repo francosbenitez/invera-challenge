@@ -31,11 +31,13 @@ def test_failed_login_invalid_credentials(api_client, login_url, invalid_user):
         "non_field_errors": ["Unable to log in with provided credentials."]
     }
 
+
 @pytest.mark.django_db
 def test_user_task_list_view(authenticated_api_client, create_task):
     url = reverse("user-task-list")
     response = authenticated_api_client.get(url)
     assert response.status_code == status.HTTP_200_OK
+
 
 @pytest.mark.django_db
 def test_user_task_assignment_view(authenticated_api_client, create_task):
@@ -43,6 +45,7 @@ def test_user_task_assignment_view(authenticated_api_client, create_task):
     data = {"task_id": create_task.id}
     response = authenticated_api_client.post(url, data=data)
     assert response.status_code == status.HTTP_200_OK
+
 
 @pytest.mark.django_db
 def test_user_task_removal_view(authenticated_api_client, create_task):

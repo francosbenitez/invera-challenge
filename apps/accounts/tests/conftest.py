@@ -92,30 +92,32 @@ def valid_user():
         last_name="Benitez",
     )
 
+
 @pytest.fixture
 def task_data():
     """
     Returns a dictionary of sample task data.
     """
-  
+
     return {
         "title": "Test Task",
         "description": "This is a test task.",
     }
 
+
 @pytest.fixture
 def create_user(db, user_data):
-    """ 
+    """
     Returns a sample user.
     """
-  
+
     return User.objects.create_user(**user_data)
+
 
 @pytest.fixture
 def create_task(db, task_data):
-    """ 
+    """
     Returns a sample task.
     """
-  
+
     return Task.objects.create(**task_data)
-  
