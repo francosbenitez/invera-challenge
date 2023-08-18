@@ -3,19 +3,10 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from rest_framework.test import APIClient
 
-from apps.accounts.tests.factories import UserFactory
 from apps.tasks.models import Task
+from utils.common_fixtures import api_client, authenticated_api_client, user
 
 User = get_user_model()
-
-
-@pytest.fixture
-def api_client():
-    """
-    Returns an APIClient instance.
-    """
-
-    return APIClient()
 
 
 @pytest.fixture
@@ -26,26 +17,6 @@ def registration_url():
 @pytest.fixture
 def login_url():
     return "/api/accounts/login/"
-
-
-@pytest.fixture
-def user():
-    """
-    Returns a sample user.
-    """
-
-    return UserFactory()
-
-
-@pytest.fixture
-def authenticated_api_client(api_client, user):
-    """
-    Returns an authenticated APIClient instance.
-    """
-
-    api_client.force_authenticate(user=user)
-
-    return api_client
 
 
 @pytest.fixture
