@@ -8,15 +8,19 @@ from rest_framework import status
 from apps.tasks.models import Task
 
 logger = getLogger(__name__)
-
+    
 
 @pytest.mark.django_db
-def test_list_tasks(authenticated_api_client):
+def test_list_tasks_authenticated(authenticated_api_client):
     url = reverse("task-list")
     response = authenticated_api_client.get(url)
     assert response.status_code == status.HTTP_200_OK
 
-
+def test_list_tasks_unauthenticated(api_client):
+    url = reverse("task-list")
+    response = api_client.get(url)
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
+    
 @pytest.mark.django_db
 def test_list_tasks_by_content(authenticated_api_client, task):
     url = reverse("task-list")
