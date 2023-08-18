@@ -1,7 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from rest_framework.test import APIClient
 
 from apps.tasks.models import Task
 from utils.common_fixtures import api_client, authenticated_api_client, user
@@ -62,18 +61,6 @@ def valid_user():
         is_staff=False,
         last_name="Benitez",
     )
-
-
-@pytest.fixture
-def task_data():
-    """
-    Returns a dictionary of sample task data.
-    """
-
-    return {
-        "title": "Test Task",
-        "description": "This is a test task.",
-    }
 
 
 @pytest.fixture
