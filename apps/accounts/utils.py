@@ -26,6 +26,7 @@ def handle_task_action(request, action):
 
     if not task_ids:
         logger.error("No task ids provided.")
+
         return Response(
             {"detail": "No task ids provided.", "code": "no_task_ids_provided"},
             status=status.HTTP_400_BAD_REQUEST,
@@ -36,6 +37,7 @@ def handle_task_action(request, action):
             task = Task.objects.get(id=task_id)
         except Task.DoesNotExist:
             logger.error(f"Task with id {task_id} does not exist.")
+
             return Response(
                 {"detail": "Task does not exist.", "code": "task_does_not_exist"},
                 status=status.HTTP_400_BAD_REQUEST,
@@ -44,6 +46,7 @@ def handle_task_action(request, action):
         if action == "removal":
             if task not in request.user.tasks.all():
                 logger.error(f"Task with id {task_id} is not {word} to the user.")
+
                 return Response(
                     {
                         "detail": f"Task is not {word} to the user.",
@@ -55,6 +58,7 @@ def handle_task_action(request, action):
         elif action == "assignment":
             if task in request.user.tasks.all():
                 logger.error(f"Task with id {task_id} is already {word} to the user.")
+
                 return Response(
                     {
                         "detail": f"Task is already {word} to the user.",

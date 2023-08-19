@@ -22,12 +22,3 @@ class UserFactory(DjangoModelFactory):
     is_staff = False
     created_at = factory.LazyFunction(timezone.now)
     updated_at = factory.LazyFunction(timezone.now)
-
-    @factory.post_generation
-    def tasks(self, create, extracted, **kwargs):
-        if not create:
-            return
-
-        if extracted:
-            for task in extracted:
-                self.tasks.add(task)
