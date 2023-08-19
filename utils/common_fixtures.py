@@ -50,7 +50,7 @@ def task_data():
 @pytest.fixture
 def task(user, task_data):
     """
-    Returns a sample task.
+    Returns an instance of Task model.
     """
 
     return Task.objects.create(user=user, **task_data)
