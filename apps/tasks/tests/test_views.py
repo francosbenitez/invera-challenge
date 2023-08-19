@@ -11,20 +11,20 @@ logger = getLogger(__name__)
 
 
 @pytest.mark.django_db
-def test_list_tasks_by_authenticated_user(authenticated_api_client):
+def test_task_list_by_authenticated_user(authenticated_api_client):
     url = reverse("task-list")
     response = authenticated_api_client.get(url)
     assert response.status_code == status.HTTP_200_OK
 
 
-def test_list_tasks_by_unauthenticated_user(api_client):
+def test_task_list_by_unauthenticated_user(api_client):
     url = reverse("task-list")
     response = api_client.get(url)
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 
 @pytest.mark.django_db
-def test_filter_tasks_by_content(authenticated_api_client, task):
+def test_task_list_filtered_by_content(authenticated_api_client, task):
     url = reverse("task-list")
     response = authenticated_api_client.get(url, query_params={"content": "Task"})
     assert response.status_code == status.HTTP_200_OK
@@ -32,7 +32,7 @@ def test_filter_tasks_by_content(authenticated_api_client, task):
 
 
 @pytest.mark.django_db
-def test_filter_tasks_by_date(authenticated_api_client, task):
+def test_task_list_filtered_by_date(authenticated_api_client, task):
     url = reverse("task-list")
     response = authenticated_api_client.get(
         url, query_params={"date": datetime.now().strftime("%Y-%m-%d")}
@@ -42,7 +42,7 @@ def test_filter_tasks_by_date(authenticated_api_client, task):
 
 
 @pytest.mark.django_db
-def test_create_task(authenticated_api_client, task_data):
+def test_task_create(authenticated_api_client, task_data):
     url = reverse("task-create")
     response = authenticated_api_client.post(url, data=task_data)
     assert response.status_code == status.HTTP_201_CREATED
@@ -50,7 +50,7 @@ def test_create_task(authenticated_api_client, task_data):
 
 
 @pytest.mark.django_db
-def test_update_task(authenticated_api_client, task, task_update_data):
+def test_task_update(authenticated_api_client, task, task_update_data):
     url = reverse("task-update", kwargs={"pk": task.id})
     response = authenticated_api_client.patch(url, data=task_update_data)
     assert response.status_code == status.HTTP_200_OK
@@ -60,7 +60,7 @@ def test_update_task(authenticated_api_client, task, task_update_data):
 
 
 @pytest.mark.django_db
-def test_delete_task(authenticated_api_client, task):
+def test_task_delete(authenticated_api_client, task):
     url = reverse("task-delete", kwargs={"pk": task.id})
     response = authenticated_api_client.delete(url)
     assert response.status_code == status.HTTP_204_NO_CONTENT
