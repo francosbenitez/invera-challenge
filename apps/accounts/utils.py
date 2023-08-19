@@ -17,6 +17,7 @@ def handle_task_action(request, action):
 
     if not request.data.get("task_id"):
         logger.error("No task id provided.")
+
         return Response(
             {"detail": "No task id provided.", "code": "no_task_id_provided"},
             status=status.HTTP_400_BAD_REQUEST,
