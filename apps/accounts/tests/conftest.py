@@ -69,19 +69,3 @@ def valid_user():
     )
 
 
-@pytest.fixture
-def create_user(db, user_data):
-    """
-    Returns a sample user.
-    """
-
-    return User.objects.create_user(**user_data)
-
-
-@pytest.fixture
-def create_task(db, task_data):
-    """
-    Returns a sample task.
-    """
-
-    return Task.objects.create(**task_data)
