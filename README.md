@@ -27,7 +27,7 @@ The steps below will get you up and running with a local development environment
 ##### Server
 
 - Build and run the docker-compose file `docker-compose up --build`.
-- Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
+- Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/). On this route, you can also find the Swagger Documentation.
 - Enjoy!
 
 ##### Tests
