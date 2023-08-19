@@ -4,8 +4,6 @@ import pytest
 from django.urls import reverse
 from rest_framework import status
 
-from apps.tasks.tests.conftest import task, task_data
-
 logger = getLogger(__name__)
 
 
