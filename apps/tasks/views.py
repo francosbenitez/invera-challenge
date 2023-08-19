@@ -5,15 +5,10 @@ from rest_framework.generics import (
     ListAPIView,
     UpdateAPIView,
 )
-from rest_framework.permissions import IsAuthenticated
+
+from utils.mixins import TaskMixin
 
 from .models import Task
-from .serializers import TaskSerializer
-
-
-class TaskMixin:
-    serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
 
 
 class TaskCreateAPIView(TaskMixin, CreateAPIView):
@@ -40,7 +35,7 @@ class TaskListAPIView(TaskMixin, ListAPIView):
                 Q(title__icontains=content) | Q(description__icontains=content)
             )
 
-        sorted_queryset = queryset.order_by("-created_at")
+        sorted_queryset = queryset.order_by("id")
 
         return sorted_queryset
 

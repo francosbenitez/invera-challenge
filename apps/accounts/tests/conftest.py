@@ -67,5 +67,3 @@ def valid_user():
         is_staff=False,
         last_name="Benitez",
     )
-
-
