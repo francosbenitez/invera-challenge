@@ -67,3 +67,14 @@ def valid_user():
         is_staff=False,
         last_name="Benitez",
     )
+
+
+@pytest.fixture
+def assigned_task(task, user):
+    """
+    Returns a Task object assigned to a User.
+    """
+
+    user.tasks.add(task)
+
+    return task

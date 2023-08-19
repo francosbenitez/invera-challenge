@@ -31,10 +31,11 @@ def test_failed_login_invalid_credentials(api_client, login_url, invalid_user):
 
 
 @pytest.mark.django_db
-def test_user_task_list_view(authenticated_api_client, task):
+def test_user_task_list_view(authenticated_api_client, assigned_task):
     url = reverse("user-task-list")
     response = authenticated_api_client.get(url)
     assert response.status_code == status.HTTP_200_OK
+    assert response.data["results"][0]["title"] == assigned_task.title
 
 
 @pytest.mark.django_db
@@ -43,11 +44,19 @@ def test_user_task_assignment_view(authenticated_api_client, task):
     data = {"task_id": task.id}
     response = authenticated_api_client.post(url, data=data)
     assert response.status_code == status.HTTP_200_OK
+    assert response.json() == {
+        "detail": "Tasks assigned successfully.",
+        "code": "tasks_assigned_successfully",
+    }
 
 
 @pytest.mark.django_db
-def test_user_task_removal_view(authenticated_api_client, task):
+def test_user_task_removal_view(authenticated_api_client, assigned_task):
     url = reverse("user-task-removal")
-    data = {"task_id": task.id}
+    data = {"task_id": assigned_task.id}
     response = authenticated_api_client.delete(url, data=data)
     assert response.status_code == status.HTTP_200_OK
+    assert response.json() == {
+        "detail": "Tasks removed successfully.",
+        "code": "tasks_removed_successfully",
+    }
