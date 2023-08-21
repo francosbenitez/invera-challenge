@@ -19,22 +19,22 @@ The steps below will get you up and running with a local development environment
 
 ### Steps
 
-#### Local
-
 - Clone the repo `git clone https://github.com/francosbenitez/invera-challenge`.
 - Navigate to repo directory `cd invera-challenge`.
 
-##### Server
+#### Server
 
 - Build and run the docker-compose file `docker-compose up --build`.
 - Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/). On this route, you can also find the Swagger Documentation.
 - Enjoy!
 
-##### Tests
+#### Tests
 
 - Run `docker-compose run --rm web pytest`.
 
-#### Preview
+## Preview
+
+I also deployed a production version of this app. To try it out:
 
 - Go to [https://invera-challenge.up.railway.app/](https://invera-challenge.up.railway.app/)
 - Enjoy!
