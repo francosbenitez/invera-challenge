@@ -4,7 +4,7 @@ Django application for the Invera's challenge.
 
 [![Built with Django](https://img.shields.io/badge/built%20with%20Django-ff69b4.svg?logo=django&color=black)](/)
 
-# Postman Documentation
+## Postman Documentation
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/17728852-fe2f566e-8677-4f48-8f0d-2252fb381c27?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D17728852-fe2f566e-8677-4f48-8f0d-2252fb381c27%26entityType%3Dcollection%26workspaceId%3De2dd2eb0-609c-4662-aee5-e51c7cbdb4ee)
 
