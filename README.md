@@ -25,7 +25,7 @@ The steps below will get you up and running with a local development environment
 #### Server
 
 - Build and run the docker-compose file `docker-compose up --build`.
-- Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/). <u>On this route, you can also find the Swagger Documentation</u>.
+- Go to [http://0.0.0.0:8000/](http://0.0.0.0:8000/). <ins>On this route, you can also find the Swagger Documentation</ins>.
 - Enjoy!
 
 #### Tests
@@ -34,7 +34,7 @@ The steps below will get you up and running with a local development environment
 
 ## Preview
 
-I also deployed a production version of this app. To try it out:
+I also deployed a production-ready version of this app. To try it out:
 
 - Go to [https://invera-challenge.up.railway.app/](https://invera-challenge.up.railway.app/)
 - Enjoy!
