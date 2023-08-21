@@ -2,7 +2,6 @@ import pytest
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from apps.tasks.models import Task
 from utils.common_fixtures import (
     api_client,
     authenticated_api_client,
