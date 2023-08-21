@@ -55,6 +55,7 @@ def handle_task_action(request, action):
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
+
             request.user.tasks.remove(task)
         elif action == "assignment":
             if task in request.user.tasks.all():
@@ -67,6 +68,7 @@ def handle_task_action(request, action):
                     },
                     status=status.HTTP_400_BAD_REQUEST,
                 )
+
             request.user.tasks.add(task)
 
     logger.info(f"Task with ids {task_ids} have been {word} from the user.")

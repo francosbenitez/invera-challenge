@@ -3,7 +3,7 @@ from django.db import models
 
 class Task(models.Model):
     """
-    Represents a task that needs to be completed.
+    Represents a task that can be assigned to a user.
     """
 
     title = models.CharField(max_length=255)
