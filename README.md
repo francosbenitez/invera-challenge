@@ -32,9 +32,4 @@ The steps below will get you up and running with a local development environment
 
 - Run `docker-compose run --rm web pytest`.
 
-## Preview
 
-I also deployed a production-ready version of this app. To try it out:
-
-- Go to [https://invera-challenge.up.railway.app/](https://invera-challenge.up.railway.app/)
-- Enjoy!
